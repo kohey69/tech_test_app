@@ -6,6 +6,7 @@ gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'haml-rails'
 gem 'jsbundling-rails'
+gem 'kaminari'
 gem 'pg'
 gem 'propshaft'
 gem 'puma'
