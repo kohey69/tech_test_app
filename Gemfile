@@ -16,10 +16,12 @@ gem 'turbo-rails'
 
 group :development, :test do
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails'
 end
 
 group :development do
+  gem 'bullet'
   gem 'haml_lint', require: false
   gem 'letter_opener_web'
   gem 'sgcop', github: 'SonicGarden/sgcop'
