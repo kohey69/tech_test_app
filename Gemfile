@@ -25,3 +25,8 @@ group :development do
   gem 'sgcop', github: 'SonicGarden/sgcop'
   gem 'web-console'
 end
+
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+end
