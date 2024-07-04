@@ -1,0 +1,23 @@
+%nav.navbar.navbar-expand-lg.bg-body-tertiary
+  .container-fluid
+    = link_to 'TechApp', root_path, class: 'navbar-brand'
+    %button.navbar-toggler{ 'data-bs-target': '.navbar-dropdown', 'data-bs-toggle': 'collapse', type: 'button' }
+      %span.navbar-toggler-icon
+    .navbar-dropdown.collapse.navbar-collapse
+      %ul.navbar-nav
+        %li.nav-item
+          %a.nav-link.active{ href: '#' } 一覧
+        %li.nav-item
+          %a.nav-link{ href: '#' } 一覧
+        %li.nav-item
+          %a.nav-link{ href: '#' } 作成
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{ 'data-bs-toggle': 'dropdown', href: '#', role: 'button' }
+            メールアドレス
+          %ul.dropdown-menu
+            %li
+              %a.dropdown-item{ href: '#' } マイページ
+            %li
+              %a.dropdown-item{ href: '#' } 基本情報編集
+            %li
+              %a.dropdown-item{ href: '#' } ログアウト
