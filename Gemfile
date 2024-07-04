@@ -15,6 +15,7 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'rspec-rails'
 end
 
