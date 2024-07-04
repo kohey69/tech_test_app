@@ -14,6 +14,10 @@ gem 'simple_form'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 group :development do
   gem 'haml_lint', require: false
   gem 'letter_opener_web'
