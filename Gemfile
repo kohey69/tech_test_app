@@ -16,6 +16,7 @@ gem 'turbo-rails'
 
 group :development do
   gem 'haml_lint', require: false
+  gem 'letter_opener_web'
   gem 'sgcop', github: 'SonicGarden/sgcop'
   gem 'web-console'
 end
