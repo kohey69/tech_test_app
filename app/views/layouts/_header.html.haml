@@ -5,19 +5,16 @@
       %span.navbar-toggler-icon
     .navbar-dropdown.collapse.navbar-collapse
       %ul.navbar-nav
-        %li.nav-item
-          %a.nav-link.active{ href: '#' } 一覧
-        %li.nav-item
-          %a.nav-link{ href: '#' } 一覧
-        %li.nav-item
-          %a.nav-link{ href: '#' } 作成
-        %li.nav-item.dropdown
-          %a.nav-link.dropdown-toggle{ 'data-bs-toggle': 'dropdown', href: '#', role: 'button' }
-            メールアドレス
-          %ul.dropdown-menu
-            %li
-              %a.dropdown-item{ href: '#' } マイページ
-            %li
-              %a.dropdown-item{ href: '#' } 基本情報編集
-            %li
-              %a.dropdown-item{ href: '#' } ログアウト
+        %li.nav-item= link_to 'イベント一覧', '#', class: 'nav-link'
+        %li.nav-item= link_to 'レビューランキング一覧', '#', class: 'nav-link'
+        - if user_signed_in?
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle{ 'data-bs-toggle': 'dropdown', href: '#', role: 'button' }= current_user.name
+            %ul.dropdown-menu
+              %li= link_to 'マイページ', '#', class: 'dropdown-item'
+              %li= link_to '基本情報編集', edit_user_registration_path, class: 'dropdown-item'
+              %li= link_to 'ログアウト', destroy_user_session_path, class: 'dropdown-item', data: { turbo_method: :delete }
+        - else
+          %li.nav-item= link_to '新規登録', new_user_registration_path, class: 'nav-link'
+          %li.nav-item= link_to 'ログイン', new_user_session_path, class: 'nav-link'
+    = link_to 'イベント作成', '#', class: 'btn btn-success'
