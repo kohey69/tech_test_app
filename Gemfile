@@ -6,7 +6,6 @@ gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise'
 gem 'haml-rails'
-gem 'html2haml'
 gem 'jsbundling-rails'
 gem 'kaminari'
 gem 'pg'
