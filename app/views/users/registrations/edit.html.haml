@@ -1,0 +1,14 @@
+%h2 基本情報編集
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :name
+    = f.input :email, required: true
+    - if resource.pending_reconfirmation?
+      %p メールアドレスの有効化が完了していません: #{resource.unconfirmed_email}
+    = f.input :description
+    = f.input :password, hint: '変更しない場合は空欄のままにしてください', required: false
+    = f.input :password_confirmation, required: false
+    = f.input :current_password, hint: '情報を変更する場合には入力が必要です', required: true
+  .form-actions.mb-3
+    = f.button :submit
