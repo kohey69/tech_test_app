@@ -3,6 +3,6 @@
   = f.error_notification
   = f.full_error :confirmation_token
   .form-inputs
-    = f.input :email, required: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), input_html: { autocomplete: "email" }
+    = f.input :email, required: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), input_html: { autocomplete: 'email' }
   .form-actions
     = f.button :submit, 'アカウント有効化メールを再送する'
