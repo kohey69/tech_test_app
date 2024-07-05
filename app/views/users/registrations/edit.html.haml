@@ -8,7 +8,7 @@
       %p メールアドレスの有効化が完了していません: #{resource.unconfirmed_email}
     - if f.object.avatar.representable?
       = f.input :avatar, as: :hidden, input_html: { value: f.object.avatar.signed_id }
-    = f.input :avatar, input_html: { direct_upload: true }
+    = f.input :avatar, input_html: { direct_upload: true, accept: 'image/jpeg, image/jpg, image/gif, image/png' }
     - if f.object.avatar.representable?
       = image_tag f.object.avatar.variant(:small), class: 'rounded-circle mb-2'
     = f.input :description
