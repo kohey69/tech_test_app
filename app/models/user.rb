@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  AVATAR_CONTENT_TYPE = %w[image/png image/jpg image/jpeg image/gif].freeze
+
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :validatable
 
@@ -7,4 +9,5 @@ class User < ApplicationRecord
   end
 
   validates :name, presence: true
+  validates :avatar, content_type: { in: AVATAR_CONTENT_TYPE }, size: { less_than: 5.megabytes }
 end
