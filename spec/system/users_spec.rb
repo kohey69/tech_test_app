@@ -16,6 +16,58 @@ RSpec.describe 'Users', type: :system do
       end.to change(User, :count).by(1)
       expect(page).to have_current_path root_path
     end
+
+    it 'プロフィール写真を登録できること' do
+      visit new_user_registration_path
+
+      fill_in 'ユーザー名', with: '田中太郎'
+      fill_in 'メールアドレス', with: 'sample@example.com'
+      attach_file 'プロフィール写真', Rails.root.join('spec/support/files/sample_avatar.svg')
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+
+      expect do
+        click_on '登録する'
+        expect(page).to have_content '本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。'
+      end.to change(User, :count).by(1)
+      expect(page).to have_current_path root_path
+      expect(User.last.avatar).to be_attached
+      expect(User.last.avatar.filename.to_s).to eq 'sample_avatar.svg'
+    end
+
+    it 'プロフィール画像を添付してバリデーションエラーとなっても添付した画像が表示できること', :js do
+      visit new_user_registration_path
+
+      fill_in 'ユーザー名', with: '田中太郎'
+      fill_in 'メールアドレス', with: 'sample@example.com'
+      attach_file 'プロフィール写真', Rails.root.join('spec/support/files/sample_avatar.png')
+      fill_in 'user[password]', with: 'password'
+
+      expect do
+        click_on '登録する'
+      end.not_to change(User, :count)
+      expect(page).to have_content 'エラーがあります。確認してください。'
+      expect(page).to have_current_path new_user_registration_path
+      expect(page).to have_selector "img[alt='添付画像']"
+    end
+
+    it 'プロフィール画像の拡張子にバリデーションがかかっていること', :js do
+      visit new_user_registration_path
+
+      fill_in 'ユーザー名', with: '田中太郎'
+      fill_in 'メールアドレス', with: 'sample@example.com'
+      attach_file 'プロフィール写真', Rails.root.join('spec/support/files/sample_avatar.svg')
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+
+      expect do
+        click_on '登録する'
+      end.not_to change(User, :count)
+      expect(page).to have_content 'エラーがあります。確認してください。'
+      expect(page).to have_current_path new_user_registration_path
+      expect(page).to have_content 'プロフィール写真のContent Typeが不正です'
+      expect(page).not_to have_selector "img[alt='添付画像']"
+    end
   end
 
   describe 'アカウント有効化' do
