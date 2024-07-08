@@ -21,6 +21,6 @@
             %span.badge.text-bg-success 公開する
           - else
             %span.badge.text-bg-secondary 公開しない
-        %td= link_to '詳細', '#', class: 'btn btn-sm btn-light'
+        %td= link_to '詳細', my_event_path(event), class: 'btn btn-sm btn-light'
 
 = paginate events
