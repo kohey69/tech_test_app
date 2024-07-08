@@ -4,7 +4,7 @@ FactoryBot.define do
     description { '本コンテストはそれらのニーズに応え、新時代への道を切り開くLINE BOTを募集し、価値 × 新規性 × 技術の3軸で特に優れたサービスを表彰するものです。' }
     place { 'オンライン' }
     start_at { Time.zone.now }
-    end_at { Time.zone.now }
+    end_at { Time.zone.now.since(1.minute) }
     category { :business }
 
     trait :with_user do
