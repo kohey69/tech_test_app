@@ -6,6 +6,7 @@ gem 'active_storage_validations'
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise'
+gem 'enumerize'
 gem 'haml-rails'
 gem 'image_processing'
 gem 'jsbundling-rails'
@@ -16,6 +17,7 @@ gem 'puma'
 gem 'simple_form'
 gem 'stimulus-rails'
 gem 'turbo-rails'
+gem 'validates_timeliness'
 
 group :development, :test do
   gem 'factory_bot_rails'

@@ -5,5 +5,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
 
+  namespace :my do
+    resources :events
+  end
+
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

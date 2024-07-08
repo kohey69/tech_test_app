@@ -8,6 +8,8 @@ class User < ApplicationRecord
     attachable.variant :small, resize_to_limit: [50, 50]
   end
 
+  has_many :events, dependent: :destroy
+
   validates :name, presence: true
   validates :avatar, content_type: { in: AVATAR_CONTENT_TYPE }, size: { less_than: 5.megabytes }
 end
