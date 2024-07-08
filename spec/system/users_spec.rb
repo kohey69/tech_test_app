@@ -143,7 +143,7 @@ RSpec.describe 'Users', type: :system do
 
         within '.navbar' do
           expect(page).to have_link 'TechApp', href: root_path
-          expect(page).to have_link 'イベント一覧', href: '#'
+          expect(page).to have_link 'イベント一覧', href: events_path
           expect(page).to have_link 'レビューランキング一覧', href: '#'
           expect(page).to have_link 'ログイン', href: new_user_session_path
           expect(page).to have_link '新規登録', href: new_user_registration_path
@@ -160,7 +160,7 @@ RSpec.describe 'Users', type: :system do
 
         within '.navbar' do
           expect(page).to have_link 'TechApp', href: root_path
-          expect(page).to have_link 'イベント一覧', href: '#'
+          expect(page).to have_link 'イベント一覧', href: events_path
           expect(page).to have_link 'レビューランキング一覧', href: '#'
           expect(page).to have_link 'マイページ', href: my_events_path
           expect(page).to have_link '基本情報編集', href: edit_user_registration_path

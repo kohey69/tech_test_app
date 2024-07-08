@@ -5,7 +5,7 @@
       %span.navbar-toggler-icon
     .navbar-dropdown.collapse.navbar-collapse
       %ul.navbar-nav
-        %li.nav-item= link_to 'イベント一覧', '#', class: 'nav-link'
+        %li.nav-item= link_to 'イベント一覧', events_path, class: 'nav-link'
         %li.nav-item= link_to 'レビューランキング一覧', '#', class: 'nav-link'
         - if user_signed_in?
           %li.nav-item.dropdown

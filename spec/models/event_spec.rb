@@ -52,4 +52,20 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+
+  describe '#not_started' do
+    context '現在日時が7月1日0時の場合' do
+      before do
+        event = create(:event, :with_user, title: '取得できるイベント')
+        other_event = create(:event, :with_user, title: '取得できないイベント')
+        event.update_columns(start_at: Time.zone.local(2024, 7, 1, 0, 1))
+        other_event.update_columns(start_at: Time.zone.local(2024, 6, 30, 23, 59))
+        travel_to Time.zone.local(2024, 7, 1, 0, 0)
+      end
+
+      it '7月1日0時までに開催されたイベントは取得されないこと' do
+        expect(Event.not_started.pluck(:title)).to contain_exactly('取得できるイベント')
+      end
+    end
+  end
 end

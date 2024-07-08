@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
 
+  resources :events, only: %i[index show]
+
   namespace :my do
     resources :events
   end

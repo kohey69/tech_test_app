@@ -14,4 +14,6 @@ class Event < ApplicationRecord
   validates :category, presence: true
 
   scope :default_order, -> { order(start_at: :desc, id: :desc) }
+  scope :published, -> { where(published: true) }
+  scope :not_started, -> { where('start_at > ?', Time.current) }
 end
