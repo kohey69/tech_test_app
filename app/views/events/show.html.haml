@@ -1,0 +1,7 @@
+%h1.fs-4.mb-4= @event.title
+
+.row
+  .col-md-2
+    = render 'events/participate_menu'
+  .col-md-10
+    = render 'events/event', event: @event
