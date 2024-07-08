@@ -1,0 +1,26 @@
+= paginate events
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{:scope => "col"}= Event.human_attribute_name(:title)
+      %th{:scope => "col"}= Event.human_attribute_name(:category)
+      %th{:scope => "col"}= Event.human_attribute_name(:start_at)
+      %th{:scope => "col"}= Event.human_attribute_name(:end_at)
+      %th{:scope => "col"}= Event.human_attribute_name(:published)
+      %th{:scope => "col"}
+  %tbody
+    - events.each do |event|
+      %tr
+        %td= event.title
+        %td= event.category.text
+        %td= l event.start_at
+        %td= l event.end_at
+        %td
+          - if event.published?
+            %span.badge.text-bg-success 公開する
+          - else
+            %span.badge.text-bg-secondary 公開しない
+        %td= link_to '詳細', '#', class: 'btn btn-sm btn-light'
+
+= paginate events

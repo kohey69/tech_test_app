@@ -1,4 +1,8 @@
 class My::EventsController < My::ApplicationController
+  def index
+    @events = current_user.events.default_order.page(params[:page])
+  end
+
   def new
     @event = current_user.events.build
   end
