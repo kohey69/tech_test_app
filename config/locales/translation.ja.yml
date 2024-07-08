@@ -15,6 +15,7 @@ ja:
         start_at: 開始日時
         end_at: 終了日時
         category: カテゴリー
+        published: 公開する
 
   enumerize:
     event:

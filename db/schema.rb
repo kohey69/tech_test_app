@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_08_002432) do
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
     t.string "category", null: false
+    t.boolean "published", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_events_on_user_id"

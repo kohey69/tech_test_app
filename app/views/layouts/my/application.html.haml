@@ -8,8 +8,8 @@
     = csp_meta_tag
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
-  %body
+  %body.bg-success-subtle
     = render 'layouts/toast'
     = render 'layouts/header'
-    .container.p-4.my-4
+    .container.p-4.my-4.bg-body-tertiary.rounded
       = yield

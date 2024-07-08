@@ -1,4 +1,4 @@
-class My::EventsController < ApplicationController
+class My::EventsController < My::ApplicationController
   def new
     @event = current_user.events.build
   end
@@ -16,6 +16,6 @@ class My::EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :description, :place, :start_at, :end_at, :category)
+    params.require(:event).permit(:title, :description, :place, :start_at, :end_at, :category, :published)
   end
 end

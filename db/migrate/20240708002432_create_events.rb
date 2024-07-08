@@ -8,6 +8,7 @@ class CreateEvents < ActiveRecord::Migration[7.1]
       t.datetime :start_at, null: false
       t.datetime :end_at, null: false
       t.string :category, null: false
+      t.boolean :published, null: false, default: false
 
       t.timestamps
     end
