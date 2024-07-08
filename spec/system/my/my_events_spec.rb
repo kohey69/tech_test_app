@@ -56,8 +56,8 @@ RSpec.describe 'My::Events', type: :system do
       login_as user, scope: :user
       visit my_event_path(event)
 
-      expect(page).to have_link '編集する', href: '#'
-      expect(page).to have_link '削除する', href: '#'
+      expect(page).to have_link '編集する', href: edit_my_event_path(event)
+      expect(page).to have_link '削除する', href: my_event_path(event)
     end
   end
 end

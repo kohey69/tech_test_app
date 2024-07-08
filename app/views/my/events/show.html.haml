@@ -8,8 +8,8 @@
 .row
   .col-md-2
     .list-group
-      = link_to '編集する', '#', class: 'list-group-item list-group-item-action'
-      = link_to '削除する', '#', class: 'list-group-item list-group-item-action text-danger'
+      = link_to '編集する', edit_my_event_path(@event), class: 'list-group-item list-group-item-action'
+      = link_to '削除する', my_event_path(@event), class: 'list-group-item list-group-item-action text-danger', data: { turbo_method: :delete, turbo_confirm: '削除すると参加ユーザーが参照できなくなりますがよろしいですか？' }
   .col-md-10
     .card
       .card-body
@@ -17,4 +17,4 @@
         %h6.card-subtitle.mb-2.text-body-secondary= @event.category.text
         .text-muted= "開始日： #{l @event.start_at}"
         .text-muted= "終了日： #{l @event.end_at}"
-        %p.card-text= @event.description
+        %p.card-text= simple_format @event.description
