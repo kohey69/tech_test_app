@@ -7,7 +7,9 @@ class Event < ApplicationRecord
 
   validates :title, presence: true
   validates :place, presence: true
-  validates_datetime :start_at, on_or_after: -> { Time.current }
-  validates_datetime :end_at, after: :start_at, on_or_after: -> { Time.current }
+  validates :start_at, presence: true
+  validates :end_at, presence: true
+  validates_datetime :start_at, on_or_after: -> { Time.current }, on: :create
+  validates_datetime :end_at, after: :start_at
   validates :category, presence: true
 end
