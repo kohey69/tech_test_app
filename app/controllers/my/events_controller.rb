@@ -8,7 +8,8 @@ class My::EventsController < ApplicationController
     if @event.save
       redirect_to root_path, notice: t('controllers.created')
     else
-      render :new, status: :unprocessable_content, alert: t('controllers.failed')
+      flash.now[:alert] = t('controllers.failed')
+      render :new, status: :unprocessable_content
     end
   end
 
