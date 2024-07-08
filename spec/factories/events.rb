@@ -15,5 +15,9 @@ FactoryBot.define do
     trait :unpublished do
       published { false }
     end
+
+    trait :skip_validate do
+      to_create { |instance| instance.save(validate: false) }
+    end
   end
 end
