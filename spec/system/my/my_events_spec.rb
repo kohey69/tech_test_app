@@ -56,8 +56,34 @@ RSpec.describe 'My::Events', type: :system do
       login_as user, scope: :user
       visit my_event_path(event)
 
-      expect(page).to have_link '編集する', href: '#'
-      expect(page).to have_link '削除する', href: '#'
+      expect(page).to have_link '編集する', href: edit_my_event_path(event)
+      expect(page).to have_link '削除する', href: my_event_path(event)
+    end
+  end
+
+  describe 'マイページ： イベント編集' do
+    let(:event) { create(:event, user:) }
+
+    it '開始日時を今日より前の日付で更新できること' do
+      login_as user, scope: :user
+      visit edit_my_event_path(event)
+
+      fill_in '開始日時', with: '2024-04-11-T14:08:00'
+      fill_in '終了日時', with: '2024-04-11-T14:09:00'
+      click_on '更新する'
+
+      expect(page).to have_content '更新しました'
+    end
+
+    it '終了日時を開始日時より後の日時で更新できないこと' do
+      login_as user, scope: :user
+      visit edit_my_event_path(event)
+
+      fill_in '開始日時', with: '2024-04-11-T14:08:00'
+      fill_in '終了日時', with: '2024-04-11-T14:07:00'
+      click_on '更新する'
+
+      expect(page).to have_content '失敗しました'
     end
   end
 end
