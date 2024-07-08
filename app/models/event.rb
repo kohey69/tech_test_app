@@ -12,4 +12,6 @@ class Event < ApplicationRecord
   validates_datetime :start_at, on_or_after: -> { Time.current }, on: :create
   validates_datetime :end_at, after: :start_at
   validates :category, presence: true
+
+  scope :default_order, -> { order(start_at: :desc, id: :desc) }
 end
