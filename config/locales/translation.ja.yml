@@ -1,0 +1,52 @@
+ja:
+  activerecord:
+    models:
+      administrator: 管理者
+      event: イベント
+
+    attributes:
+      administrator:
+        email: メールアドレス
+        password: パスワード
+      event:
+        title: タイトル
+        description: 説明
+        place: 開催場所
+        start_at: 開始日時
+        end_at: 終了日時
+        category: カテゴリー
+
+  enumerize:
+    event:
+      category:
+        music: 音楽
+        sports: スポーツ
+        business: ビジネス
+        hobby: 趣味
+        other: その他
+
+  views:
+    back: 戻る
+    new: 新規登録
+    edit: 編集
+    show: 詳細
+    save: 登録
+    sending: 処理中
+    destroy: 削除
+    confirm: 削除します。よろしいですか？
+    invited: 招待メールを送信します。よろしいですか？
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      next: "次 &rsaquo;"
+      previous: "&lsaquo; 前"
+      truncate: "&hellip;"
+
+  controllers:
+    created: 新規登録しました
+    destroyed: 削除しました
+    updated: 更新しました
+    invited: 招待メールを送信しました
+    answered: 回答しました
+    copied: コピーしました
+    failed: 失敗しました
