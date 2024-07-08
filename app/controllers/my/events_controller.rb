@@ -1,6 +1,11 @@
 class My::EventsController < My::ApplicationController
+  before_action :set_event, only: %i[show]
+
   def index
     @events = current_user.events.default_order.page(params[:page])
+  end
+
+  def show
   end
 
   def new
@@ -21,5 +26,9 @@ class My::EventsController < My::ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :description, :place, :start_at, :end_at, :category, :published)
+  end
+
+  def set_event
+    @event = current_user.events.find(params[:id])
   end
 end
