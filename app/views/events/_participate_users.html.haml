@@ -1,7 +1,7 @@
-- users = event.participate_users.eager_load(avatar_attachment: :blob)
+- users = event.participate_users.eager_load(avatar_attachment: :blob).default_order
 
-.container.p-4
-  %h3.fs-6.fw-bolder 参加者一覧
+.container.py-3
+  %h3.fs-5 参加者一覧
 
   %ul.list-group
   - if users.present?

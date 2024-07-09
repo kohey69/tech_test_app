@@ -15,6 +15,8 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :avatar, content_type: { in: AVATAR_CONTENT_TYPE }, size: { less_than: 5.megabytes }
 
+  scope :default_order, -> { order(name: :asc, id: :desc) }
+
   def participate?(event)
     participations.exists?(event:)
   end
