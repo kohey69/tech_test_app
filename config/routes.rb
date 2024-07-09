@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
 
-  resources :events, only: %i[index show]
+  resources :events, only: %i[index show] do
+    resource :participation, only: %i[create destroy], module: :events
+  end
 
   namespace :my do
     resources :events

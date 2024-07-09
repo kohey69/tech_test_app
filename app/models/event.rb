@@ -4,6 +4,8 @@ class Event < ApplicationRecord
   attribute :category, :string, default: :other
 
   belongs_to :user
+  has_many :participations, dependent: :destroy
+  has_many :participate_users, through: :participations, source: :user
 
   validates :title, presence: true
   validates :place, presence: true
