@@ -55,6 +55,19 @@ RSpec.describe 'Events', type: :system do
         click_on 'イベントをお気に入り'
         expect(page).to have_content '新規登録しました'
       end.to change(Favorite, :count).by(1)
+      expect(page).to have_link 'お気に入りを解除する', href: event_favorite_path(event)
+    end
+
+    it 'お気に入りを解除できること' do
+      create(:favorite, user:, event:)
+      login_as user, scope: :user
+      visit event_path(event)
+
+      expect do
+        click_on 'お気に入りを解除する'
+        expect(page).to have_content '削除しました'
+      end.to change(Favorite, :count).by(-1)
+      expect(page).to have_link 'イベントをお気に入り', href: event_favorite_path(event)
     end
 
     it 'ゲストユーザーがお気に入りできないこと' do
