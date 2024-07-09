@@ -2,6 +2,7 @@
 
 .row
   .col-md-2
+    = render 'events/favorite_menu', event: @event
     = render 'events/participate_menu', event: @event
     = render 'events/participate_users', event: @event
   .col-md-10
