@@ -1,0 +1,13 @@
+- users = event.participate_users.eager_load(avatar_attachment: :blob)
+
+.container.p-4
+  %h3.fs-6.fw-bolder 参加者一覧
+
+  %ul.list-group
+  - if users.present?
+    - users.each do |user|
+      %li.list-group-item.mb-2
+        = image_tag avatar_path(user.avatar), class: 'events__participate-user-avatar rounded-circle'
+        = user.name
+  - else
+    %li.list-group-item 参加者がいません

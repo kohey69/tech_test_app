@@ -12,3 +12,4 @@
       = link_to '削除する', my_event_path(@event), class: 'list-group-item list-group-item-action text-danger', data: { turbo_method: :delete, turbo_confirm: '削除すると参加ユーザーが参照できなくなりますがよろしいですか？' }
   .col-md-10
     = render 'events/event', event: @event
+
