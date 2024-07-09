@@ -8,7 +8,7 @@ class Events::FavoritesController < Events::ApplicationController
 
   def destroy
     favorite = current_user.favorites.find_by(event: @event)
-    favorite&.destroy # windowを複数開いていいねを解除した時に例外を吐かないように
+    favorite&.destroy! # windowを複数開いていいねを解除した時に例外を吐かないように
     redirect_to event_path(@event), notice: t('controllers.destroyed')
   end
 
