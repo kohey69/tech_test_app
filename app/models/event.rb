@@ -6,6 +6,7 @@ class Event < ApplicationRecord
   belongs_to :user
   has_many :participations, dependent: :destroy
   has_many :participate_users, through: :participations, source: :user
+  has_many :favorites, dependent: :destroy
 
   validates :title, presence: true
   validates :place, presence: true

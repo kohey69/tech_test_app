@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :participate_events, through: :participations, source: :event
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_events, through: :favorites, source: :event
 
   validates :name, presence: true
   validates :avatar, content_type: { in: AVATAR_CONTENT_TYPE }, size: { less_than: 5.megabytes }
@@ -19,5 +21,9 @@ class User < ApplicationRecord
 
   def participate?(event)
     participations.exists?(event:)
+  end
+
+  def favorite?(event)
+    favorites.exists?(event:)
   end
 end
