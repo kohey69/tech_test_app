@@ -12,6 +12,6 @@ class EventsController < ApplicationController
   private
 
   def set_event
-    @event = Event.published.not_started.find(params[:id])
+    @event = Event.published.find(params[:id])
   end
 end

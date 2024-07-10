@@ -88,5 +88,42 @@ RSpec.describe 'Events', type: :system do
         expect(page).to have_content 'イベント主催者はお気に入り登録できません'
       end.not_to change(Favorite, :count)
     end
+
+    context '開催済みのイベントの場合' do
+      let(:event) { create(:event, :skip_validate, :with_user, title: '開催済みのイベント', start_at: 1.hour.ago) }
+
+      it 'ページ遷移できること' do
+        login_as user, scope: :user
+        visit event_path(event)
+
+        expect(page).to have_content '開催済みのイベント'
+      end
+
+      it '参加登録できないこと' do
+        login_as user, scope: :user
+        visit event_path(event)
+
+        expect(page).not_to have_link '参加する', href: event_participation_path(event)
+      end
+
+      it '参加キャンセルができないこと' do
+        login_as user, scope: :user
+        create(:participation, :skip_validate, user:, event:)
+        visit event_path(event)
+
+        expect(page).not_to have_link 'キャンセル', href: event_participation_path(event)
+      end
+
+      it 'お気に入り登録できること' do
+        login_as user, scope: :user
+        visit event_path(event)
+
+        expect(page).to have_link 'イベントをお気に入り', href: event_favorite_path(event)
+        expect do
+          click_on 'イベントをお気に入り'
+          expect(page).to have_content '新規登録しました'
+        end.to change(Favorite, :count).by(1)
+      end
+    end
   end
 end

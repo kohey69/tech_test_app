@@ -10,5 +10,9 @@ FactoryBot.define do
     trait :with_event do
       event
     end
+
+    trait :skip_validate do
+      to_create { |instance| instance.save(validate: false) }
+    end
   end
 end
