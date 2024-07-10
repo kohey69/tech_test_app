@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[show]
 
   def index
-    @events = Event.published.not_started.order_by_start_at.page(params[:page])
+    @events = Event.published.not_ended.order_by_start_at.page(params[:page])
   end
 
   def show

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Participation, type: :model do
-  describe '#must_before_event_start_at' do
-    context '参加登録日時イベント開始日以下の場合' do
-      let(:event) { create(:event, :skip_validate, :with_user, start_at: Time.zone.local(2024, 6, 18, 11, 0)) }
+  describe '#must_before_event_end_at' do
+    context '参加登録がイベント終了後の場合' do
+      let(:event) { create(:event, :skip_validate, :with_user, end_at: Time.zone.local(2024, 6, 18, 11, 0)) }
 
       before do
         travel_to Time.zone.local(2024, 6, 18, 11, 0)
@@ -15,8 +15,8 @@ RSpec.describe Participation, type: :model do
       end
     end
 
-    context 'イベント開始日時よりも参加登録日時が早い場合' do
-      let(:event) { create(:event, :skip_validate, :with_user, start_at: Time.zone.local(2024, 6, 18, 10, 0)) }
+    context '参加登録がイベント終了前場合' do
+      let(:event) { create(:event, :skip_validate, :with_user, end_at: Time.zone.local(2024, 6, 18, 10, 0)) }
 
       before do
         travel_to Time.zone.local(2024, 6, 18, 9, 0)

@@ -53,16 +53,16 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe '#not_started' do
+  describe '#not_ended' do
     context '現在日時が7月1日0時の場合' do
       before do
         travel_to Time.zone.local(2024, 7, 1, 0, 0)
-        create(:event, :skip_validate, :with_user, title: '開始前のイベント', start_at: Time.zone.local(2024, 7, 1, 0, 1))
-        create(:event, :skip_validate, :with_user, title: '開始済みのイベント', start_at: Time.zone.local(2024, 7, 1, 0, 0))
+        create(:event, :skip_validate, :with_user, title: '終了前のイベント', end_at: Time.zone.local(2024, 7, 1, 0, 1))
+        create(:event, :skip_validate, :with_user, title: '終了後のイベント', end_at: Time.zone.local(2024, 7, 1, 0, 0))
       end
 
-      it '現在時刻以降に開始したイベントは取得されないこと' do
-        expect(Event.not_started.pluck(:title)).to contain_exactly('開始前のイベント')
+      it '現在時刻以降に終了したイベントは取得されないこと' do
+        expect(Event.not_ended.pluck(:title)).to contain_exactly('終了前のイベント')
       end
     end
   end
@@ -129,22 +129,22 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe '#not_started?' do
+  describe '#not_ended?' do
     before { travel_to Time.zone.local(2024, 6, 13, 0, 0) }
 
-    context 'イベント開始前の場合' do
-      let(:event) { create(:event, :with_user, start_at: Time.zone.local(2024, 6, 13, 0, 1)) }
+    context 'イベント終了前の場合' do
+      let(:event) { create(:event, :skip_validate, :with_user, end_at: Time.zone.local(2024, 6, 13, 0, 1)) }
 
-      it 'falseを返すこと' do
-        expect(event.not_started?).to be true
+      it 'trueを返すこと' do
+        expect(event.not_ended?).to be true
       end
     end
 
-    context 'イベント開始済みの場合' do
-      let(:event) { create(:event, :with_user, start_at: Time.zone.local(2024, 6, 13, 0, 0)) }
+    context 'イベント終了後の場合' do
+      let(:event) { create(:event, :skip_validate, :with_user, end_at: Time.zone.local(2024, 6, 13, 0, 0)) }
 
       it 'falseを返すこと' do
-        expect(event.not_started?).to be false
+        expect(event.not_ended?).to be false
       end
     end
   end

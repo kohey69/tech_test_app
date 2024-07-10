@@ -18,11 +18,11 @@ class Event < ApplicationRecord
 
   scope :default_order, -> { order(start_at: :desc, id: :desc) }
   scope :published, -> { where(published: true) }
-  scope :not_started, -> { where('start_at > ?', Time.current) }
+  scope :not_ended, -> { where('end_at > ?', Time.current) }
   scope :order_by_start_at, -> { order(start_at: :asc, id: :asc) }
   scope :order_by_participations_count, -> { joins(:participations).group('events.id').order('COUNT(participations.id) DESC, events.start_at ASC') }
 
-  def not_started?
-    self.start_at > Time.current
+  def not_ended?
+    self.end_at > Time.current
   end
 end
