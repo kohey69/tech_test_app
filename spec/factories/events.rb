@@ -4,7 +4,7 @@ FactoryBot.define do
     description { '本コンテストはそれらのニーズに応え、新時代への道を切り開くLINE BOTを募集し、価値 × 新規性 × 技術の3軸で特に優れたサービスを表彰するものです。' }
     place { 'オンライン' }
     start_at { Time.zone.now.since(1.hour) }
-    end_at { Time.zone.now.since(2.hours) }
+    end_at { start_at.since(1.hour) }
     category { :business }
     published { true }
 
@@ -14,6 +14,12 @@ FactoryBot.define do
 
     trait :unpublished do
       published { false }
+    end
+
+    trait :with_participation do
+      after(:build) do |recipe|
+        recipe.participations << build(:participation, :with_user)
+      end
     end
 
     trait :skip_validate do
