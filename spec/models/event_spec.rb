@@ -96,4 +96,38 @@ RSpec.describe Event, type: :model do
       expect(user.favorite_events.pluck(:title)).to contain_exactly('最近お気に入りされたイベント', '昔お気に入りされたイベント')
     end
   end
+
+  describe '#order_by_participations' do
+    context '参加者数が重複していない時' do
+      before do
+        event1 = create(:event, :with_user, title: '参加者が5人のイベント')
+        event2 = create(:event, :with_user, title: '参加者が3人のイベント')
+        event3 = create(:event, :with_user, title: '参加者が1人のイベント')
+        _event4 = create(:event, :with_user, title: '参加者が0人のイベント')
+        create_list(:participation, 5, :with_user, event: event1)
+        create_list(:participation, 3, :with_user, event: event2)
+        create_list(:participation, 1, :with_user, event: event3)
+      end
+
+      it '参加者が多い順に並べられること' do
+        expect(Event.order_by_participations.pluck(:title)).to contain_exactly('参加者が5人のイベント', '参加者が3人のイベント', '参加者が1人のイベント')
+      end
+    end
+
+    context '参加者数が重複している時' do
+      before do
+        event1 = create(:event, :with_user, title: '開始日時が7月1日で参加者が3人のイベント', start_at: Time.current.days_since(1))
+        event2 = create(:event, :with_user, title: '開始日時が7月2日で参加者が3人のイベント', start_at: Time.current.days_since(2))
+        event3 = create(:event, :with_user, title: '開始日時が7月3日で参加者が3人のイベント', start_at: Time.current.days_since(3))
+        _event4 = create(:event, :with_user, title: '開始日時が7月1日で参加者が0人のイベント', start_at: Time.current.days_since(1))
+        create_list(:participation, 3, :with_user, event: event1)
+        create_list(:participation, 3, :with_user, event: event2)
+        create_list(:participation, 3, :with_user, event: event3)
+      end
+
+      it '参加者が多い順に並べられること' do
+        expect(Event.order_by_participations.pluck(:title)).to contain_exactly('開始日時が7月1日で参加者が3人のイベント', '開始日時が7月2日で参加者が3人のイベント', '開始日時が7月3日で参加者が3人のイベント')
+      end
+    end
+  end
 end
