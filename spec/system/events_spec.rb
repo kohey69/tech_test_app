@@ -90,7 +90,7 @@ RSpec.describe 'Events', type: :system do
     end
 
     context '開催済みのイベントの場合' do
-      let(:event) { create(:event, :skip_validate, :with_user, title: '開催済みのイベント', start_at: 1.hour.ago) }
+      let(:event) { create(:event, :skip_validate, :with_user, title: '開催済みのイベント', end_at: 1.hour.ago) }
 
       it 'ページ遷移できること' do
         login_as user, scope: :user
