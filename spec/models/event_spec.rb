@@ -125,7 +125,7 @@ RSpec.describe Event, type: :model do
         create_list(:participation, 3, :with_user, event: event3)
       end
 
-      it '参加者が多い順に並べられること' do
+      it '開始日が早い順に並べられること' do
         expect(Event.order_by_participations.pluck(:title)).to contain_exactly('開始日時が7月1日で参加者が3人のイベント', '開始日時が7月2日で参加者が3人のイベント', '開始日時が7月3日で参加者が3人のイベント')
       end
     end
