@@ -68,4 +68,32 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+
+  describe '#order_by_start_at' do
+    before do
+      create(:event, :skip_validate, :with_user, title: '7月9日のイベント', start_at: Time.zone.local(2024, 7, 9))
+      create(:event, :skip_validate, :with_user, title: '7月10日のイベント', start_at: Time.zone.local(2024, 7, 10))
+      create(:event, :skip_validate, :with_user, title: '7月11日のイベント', start_at: Time.zone.local(2024, 7, 11))
+    end
+
+    it 'お気に入りされたイベントの中で、開始日時順に取得できること' do
+      expect(Event.order_by_start_at.pluck(:title)).to contain_exactly('7月9日のイベント', '7月10日のイベント', '7月11日のイベント')
+    end
+  end
+
+  describe 'favorite_eventsデフォルトのスコープ' do
+    let(:user) { create(:user) }
+
+    before do
+      event1 = create(:event, :with_user, title: '最近お気に入りされたイベント')
+      event2 = create(:event, :with_user, title: '昔お気に入りされたイベント')
+      _event3 = create(:event, :with_user, title: 'お気に入りされていないイベント')
+      create(:favorite, user:, event: event1, created_at: Time.zone.local(2024, 7, 1))
+      create(:favorite, user:, event: event2, created_at: Time.zone.local(2023, 6, 30))
+    end
+
+    it 'お気に入りされた公開イベントの中で、最近お気に入りした順に取得できること' do
+      expect(user.favorite_events.pluck(:title)).to contain_exactly('最近お気に入りされたイベント', '昔お気に入りされたイベント')
+    end
+  end
 end
