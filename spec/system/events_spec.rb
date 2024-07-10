@@ -113,6 +113,17 @@ RSpec.describe 'Events', type: :system do
 
         expect(page).not_to have_link 'キャンセル', href: event_participation_path(event)
       end
+
+      it 'お気に入り登録できること' do
+        login_as user, scope: :user
+        visit event_path(event)
+
+        expect(page).to have_link 'イベントをお気に入り', href: event_favorite_path(event)
+        expect do
+          click_on 'イベントをお気に入り'
+          expect(page).to have_content '新規登録しました'
+        end.to change(Favorite, :count).by(1)
+      end
     end
   end
 end
