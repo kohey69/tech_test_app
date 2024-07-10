@@ -3,11 +3,11 @@ class Participation < ApplicationRecord
   belongs_to :event
 
   validates :user_id, uniqueness: { scope: :event }
-  validate :must_before_event_start_at
+  validate :must_before_event_end_at
 
-  def must_before_event_start_at
-    if self.event.start_at <= Time.current
-      errors.add(:base, 'イベントは開始済みのため参加登録できません')
+  def must_before_event_end_at
+    if self.event.end_at <= Time.current
+      errors.add(:base, 'イベントは終了済みのため参加登録できません')
     end
   end
 end
