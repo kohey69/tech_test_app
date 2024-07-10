@@ -97,7 +97,7 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe '#order_by_participations' do
+  describe '#order_by_participations_count' do
     context '参加者数が重複していない時' do
       before do
         event1 = create(:event, :with_user, title: '参加者が5人のイベント')
@@ -110,7 +110,7 @@ RSpec.describe Event, type: :model do
       end
 
       it '参加者が多い順に並べられること' do
-        expect(Event.order_by_participations.pluck(:title)).to contain_exactly('参加者が5人のイベント', '参加者が3人のイベント', '参加者が1人のイベント')
+        expect(Event.order_by_participations_count.pluck(:title)).to contain_exactly('参加者が5人のイベント', '参加者が3人のイベント', '参加者が1人のイベント')
       end
     end
 
@@ -126,7 +126,7 @@ RSpec.describe Event, type: :model do
       end
 
       it '開始日が早い順に並べられること' do
-        expect(Event.order_by_participations.pluck(:title)).to contain_exactly('開始日時が7月1日で参加者が3人のイベント', '開始日時が7月2日で参加者が3人のイベント', '開始日時が7月3日で参加者が3人のイベント')
+        expect(Event.order_by_participations_count.pluck(:title)).to contain_exactly('開始日時が7月1日で参加者が3人のイベント', '開始日時が7月2日で参加者が3人のイベント', '開始日時が7月3日で参加者が3人のイベント')
       end
     end
   end
