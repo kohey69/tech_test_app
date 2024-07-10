@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :events
     resources :favorite_events, only: %i[index]
     resources :participating_events, only: %i[index]
+    resources :participated_events, only: %i[index]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
