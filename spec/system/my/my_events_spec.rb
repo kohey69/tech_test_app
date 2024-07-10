@@ -10,7 +10,7 @@ RSpec.describe 'My::Events', type: :system do
 
       expect(page).to have_link '作成したイベント', href: my_events_path
       expect(page).to have_link 'お気に入りしたイベント', href: my_favorite_events_path
-      expect(page).to have_link '参加予定のイベント', href: '#'
+      expect(page).to have_link '参加予定のイベント', href: my_participating_events_path
       expect(page).to have_link '参加済みのイベント', href: '#'
     end
 
