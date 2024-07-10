@@ -1,3 +1,5 @@
+= paginate events
+
 - events.each do |event|
   .card.mb-3
     .card-body
@@ -7,3 +9,5 @@
       .text-muted= "終了日： #{l event.end_at}"
       %p.card-text= truncate event.description, length: 140
       = link_to '詳細', event_path(event), class: 'card-link'
+
+= paginate events
