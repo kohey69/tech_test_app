@@ -113,4 +113,31 @@ RSpec.describe 'My::Events', type: :system do
       expect(page).to have_no_content '開始されていない参加しないイベント'
     end
   end
+
+  describe 'マイページ： 参加済みのイベント' do
+    it 'ゲストユーザーが遷移できないこと' do
+      visit my_participated_events_path
+
+      expect(page).to have_content 'ログインもしくはアカウント登録してください。'
+      expect(page).to have_current_path new_user_session_path
+    end
+
+    it '参加登録していて終了していないイベントが表示されないこと' do
+      travel_to Time.zone.local(2024, 7, 1, 0, 0)
+      event1 = create(:event, :skip_validate, :with_user, title: '終了前の参加予定のイベント', end_at: Time.zone.local(2024, 7, 1, 0, 1))
+      event2 = create(:event, :skip_validate, :unpublished, :with_user, title: '終了前の参加予定の非公開イベント', end_at: Time.zone.local(2024, 7, 1, 0, 1))
+      event3 = create(:event, :skip_validate, :with_user, title: '終了後の参加予定のイベント', end_at: Time.zone.local(2024, 7, 1, 0, 0))
+      _event4 = create(:event, :skip_validate, :with_user, title: '終了前の参加しないイベント', end_at: Time.zone.local(2024, 7, 1, 1))
+      create(:participation, user:, event: event1)
+      create(:participation, user:, event: event2)
+      create(:participation, :skip_validate, user:, event: event3)
+      login_as user, scope: :user
+      visit my_participating_events_path
+
+      expect(page).to have_content '終了前の参加予定のイベント'
+      expect(page).to have_no_content '終了前の参加予定の非公開イベント'
+      expect(page).to have_no_content '終了後の参加予定のイベント'
+      expect(page).to have_no_content '終了前の参加しないイベント'
+    end
+  end
 end
