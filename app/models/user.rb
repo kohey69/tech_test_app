@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   has_many :events, dependent: :destroy
   has_many :participations, dependent: :destroy
-  has_many :participate_events, through: :participations, source: :event
+  has_many :participate_events, -> { published }, through: :participations, source: :event
   has_many :favorites, dependent: :destroy
   has_many :favorite_events, -> { published.order('favorites.created_at DESC') }, through: :favorites, source: :event
 
