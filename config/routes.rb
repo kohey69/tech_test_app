@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   namespace :admins do
     root 'home#index'
+    resources :users, only: %i[index edit update destroy]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
