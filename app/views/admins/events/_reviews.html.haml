@@ -10,7 +10,7 @@
             = image_tag avatar_path(review.user.avatar), class: 'events__review-user-avatar rounded-circle'
             = review.user.name
           .events__review-button
-            = link_to '削除', admins_event_review_path(review), class: 'small text-danger', data: { turbo_method: :delete }
+            = link_to '削除', admins_event_review_path(event, review), class: 'small text-danger', data: { turbo_method: :delete }
         .events__reviews-body
           .events__reviews-score
             .d-flex
