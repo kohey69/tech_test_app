@@ -1,0 +1,23 @@
+.d-flex.justify-content-between.mb-2
+  .fw-bolder.mb-1 レビュー一覧
+  - unless current_user&.reviewed?(event)
+    = link_to 'レビューを書く', new_event_review_path(event), class: 'small'
+
+%ul.list-group
+  - if event.reviews.present?
+    - event.reviews.eager_load(:user).each do |review|
+      %li.list-group-item
+        .d-flex.justify-content-between
+          .events__reviews-user
+            = image_tag avatar_path(review.user.avatar), class: 'events__review-user-avatar rounded-circle'
+            = review.user.name
+          - if current_user == review.user
+            .events__review-button
+              = link_to '削除', event_review_path(event), class: 'small text-danger', data: { turbo_method: :delete }
+        .events__reviews-body
+          .events__reviews-score
+            = render 'events/review_stars', review:
+          = simple_format review.content
+  - else
+    %li.list-group-item.mb-2
+      レビューがありません

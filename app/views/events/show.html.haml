@@ -7,3 +7,5 @@
     = render 'events/participate_users', event: @event
   .col-md-10
     = render 'events/event', event: @event
+    - if @event.ended?
+      = render 'events/reviews', event: @event
