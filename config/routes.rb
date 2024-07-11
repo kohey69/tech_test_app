@@ -19,5 +19,13 @@ Rails.application.routes.draw do
     resources :participated_events, only: %i[index]
   end
 
+  devise_for :administrators, controllers: {
+    sessions: 'admins/sessions',
+  }
+
+  namespace :admins do
+    root 'home#index'
+  end
+
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
