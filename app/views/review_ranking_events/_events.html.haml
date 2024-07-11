@@ -6,7 +6,7 @@
       .fs-5.card-title
         = event.title
         %span.badge.bg-success= "#{event.rank}位"
-      .small.alert.alert-warning.p-2= "レビュー平均： #{event.average_score}"
+      .small.alert.alert-warning.p-2= "レビュー平均： #{number_with_precision(event.average_score, precision: 2)}"
       .text-muted= "参加者： #{event.participations.size}人"
       .text-muted= "カテゴリー： #{event.category.text}"
       .text-muted= "開始日： #{l event.start_at}"
