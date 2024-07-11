@@ -5,7 +5,7 @@
 
 %ul.list-group
   - if event.reviews.present?
-    - event.reviews.each do |review|
+    - event.reviews.eager_load(:user).each do |review|
       %li.list-group-item
         .d-flex.justify-content-between
           .events__reviews-user
