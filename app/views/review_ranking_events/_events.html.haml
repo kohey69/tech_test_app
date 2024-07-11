@@ -1,0 +1,17 @@
+= paginate events
+
+- events.each do |event|
+  .card.mb-3
+    .card-body
+      .fs-5.card-title
+        = event.title
+        %span.badge.bg-success= "#{event.rank}位"
+      .small.alert.alert-warning.p-2= "レビュー平均： #{event.average_score}"
+      .text-muted= "参加者： #{event.participations.size}人"
+      .text-muted= "カテゴリー： #{event.category.text}"
+      .text-muted= "開始日： #{l event.start_at}"
+      .text-muted= "終了日： #{l event.end_at}"
+      %p.card-text= truncate event.description, length: 140
+      = link_to '詳細', event_path(event), class: 'card-link'
+
+= paginate events

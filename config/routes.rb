@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resource :favorite, only: %i[create destroy], module: :events
     resource :review, only: %i[new create destroy], module: :events
   end
+  resources :review_ranking_events, only: %i[index]
 
   namespace :my do
     resources :events

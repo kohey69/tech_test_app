@@ -6,7 +6,7 @@
     .navbar-dropdown.collapse.navbar-collapse
       %ul.navbar-nav
         %li.nav-item= link_to 'イベント一覧', events_path, class: 'nav-link'
-        %li.nav-item= link_to 'レビューランキング一覧', '#', class: 'nav-link'
+        %li.nav-item= link_to 'レビューランキング', review_ranking_events_path, class: 'nav-link'
         - if user_signed_in?
           %li.nav-item.dropdown
             %a.nav-link.dropdown-toggle{ 'data-bs-toggle': 'dropdown', href: '#', role: 'button' }= current_user.name

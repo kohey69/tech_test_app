@@ -1,0 +1,16 @@
+.dropdown
+  %button.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :type => "button"}
+    = event_category_text(params[:category])
+  %ul.dropdown-menu
+    %li
+      = link_to '全て', review_ranking_events_path, class: 'dropdown-item'
+    %li
+      = link_to '音楽イベント', review_ranking_events_path(category: :music), class: 'dropdown-item'
+    %li
+      = link_to 'スポーツイベント', review_ranking_events_path(category: :sports), class: 'dropdown-item'
+    %li
+      = link_to 'ビジネスイベント', review_ranking_events_path(category: :business), class: 'dropdown-item'
+    %li
+      = link_to '趣味イベント', review_ranking_events_path(category: :hobby), class: 'dropdown-item'
+    %li
+      = link_to 'その他イベント', review_ranking_events_path(category: :other), class: 'dropdown-item'

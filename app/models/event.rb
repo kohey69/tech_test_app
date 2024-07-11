@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   extend Enumerize
-  enumerize :category, in: %i[music sports business hobby other], scope: true, predicates: true
+  enumerize :category, in: %i[music sports business hobby other], predicates: true
   attribute :category, :string, default: :other
 
   belongs_to :user
@@ -23,6 +23,12 @@ class Event < ApplicationRecord
   scope :not_ended, -> { where('end_at > ?', Time.current) }
   scope :order_by_start_at, -> { order(start_at: :asc, id: :asc) }
   scope :order_by_participations_count, -> { joins(:participations).group('events.id').order('COUNT(participations.id) DESC, events.start_at ASC') }
+  scope :with_category, ->(category) { category.nil? ? all : where(category:) }
+  scope :order_by_review_score, -> do
+    joins(:reviews)
+      .select('events.*, AVG(reviews.score) as average_score, DENSE_RANK() OVER (ORDER BY AVG(reviews.score) DESC) AS rank')
+      .group(:id).order('average_score DESC, id DESC')
+  end
 
   def not_ended?
     self.end_at > Time.current

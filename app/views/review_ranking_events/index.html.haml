@@ -1,0 +1,6 @@
+.d-flex.justify-content-between
+  %h1.fs-3 レビューランキング
+  = render 'review_ranking_events/category_dropdown'
+%p イベントをカテゴリーごとに評価が高い順に表示しています
+
+= render 'review_ranking_events/events', events: @events
