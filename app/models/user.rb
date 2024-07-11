@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :participate_events, -> { published }, through: :participations, source: :event
   has_many :favorites, dependent: :destroy
   has_many :favorite_events, -> { published.order('favorites.created_at DESC') }, through: :favorites, source: :event
+  has_many :reviews, dependent: :destroy
 
   validates :name, presence: true
   validates :avatar, content_type: { in: AVATAR_CONTENT_TYPE }, size: { less_than: 5.megabytes }
@@ -25,5 +26,9 @@ class User < ApplicationRecord
 
   def favorite?(event)
     favorites.exists?(event:)
+  end
+
+  def reviewed?(event)
+    reviews.exists?(event:)
   end
 end

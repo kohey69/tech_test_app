@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :events, only: %i[index show] do
     resource :participation, only: %i[create destroy], module: :events
     resource :favorite, only: %i[create destroy], module: :events
+    resource :review, only: %i[new create destroy], module: :events
   end
 
   namespace :my do

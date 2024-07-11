@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   has_many :participations, dependent: :destroy
   has_many :participate_users, through: :participations, source: :user
   has_many :favorites, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   validates :title, presence: true
   validates :place, presence: true
@@ -25,5 +26,9 @@ class Event < ApplicationRecord
 
   def not_ended?
     self.end_at > Time.current
+  end
+
+  def ended?
+    self.end_at <= Time.current
   end
 end

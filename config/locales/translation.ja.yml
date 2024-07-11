@@ -3,6 +3,7 @@ ja:
     models:
       administrator: 管理者
       event: イベント
+      review: レビュー
 
     attributes:
       administrator:
@@ -16,6 +17,9 @@ ja:
         end_at: 終了日時
         category: カテゴリー
         published: 公開する
+      review:
+        score: 評価
+        content: 本文
 
   enumerize:
     event:
