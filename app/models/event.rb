@@ -26,7 +26,7 @@ class Event < ApplicationRecord
   scope :with_category, ->(category) { category.nil? ? all : where(category:) }
   scope :order_by_review_score, -> do
     joins(:reviews)
-      .select('events.*, AVG(reviews.score) as average_score, DENSE_RANK() OVER (ORDER BY AVG(reviews.score) DESC) AS rank')
+      .select('events.*, AVG(reviews.score) AS average_score, RANK() OVER (ORDER BY AVG(reviews.score) DESC) AS rank')
       .group(:id).order('average_score DESC, id DESC')
   end
 
