@@ -148,4 +148,25 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+
+  describe '#order_by_review_score' do
+    before do
+      event1 = create(:event, :with_user, title: 'レビュー評価平均が4公開イベント')
+      event2 = create(:event, :with_user, title: 'レビュー評価平均が2の公開イベント')
+      event3 = create(:event, :with_user, title: 'レビュー評価平均が3の公開イベント')
+      _event4 = create(:event, :with_user, title: 'レビューがない公開イベント')
+      create(:review, :with_user, event: event1, score: 5)
+      create(:review, :with_user, event: event1, score: 3)
+      create(:review, :with_user, event: event2, score: 2)
+      create(:review, :with_user, event: event3, score: 3)
+    end
+
+    it 'レビュー平均が高い順に並べられること' do
+      events = Event.order_by_review_score.to_a
+      expect(events.pluck(:title)).to contain_exactly('レビュー評価平均が4公開イベント', 'レビュー評価平均が3の公開イベント', 'レビュー評価平均が2の公開イベント')
+      expect(events.first.rank).to eq 1
+      expect(events.second.rank).to eq 2
+      expect(events.third.rank).to eq 3
+    end
+  end
 end
