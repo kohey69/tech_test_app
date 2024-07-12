@@ -1,0 +1,8 @@
+%h1.fs-4
+  %i.bi.bi-file-person
+  マイページ
+%nav.nav.p-2.justify-content-center
+  = link_to '作成したイベント', my_events_path, class: 'nav-link'
+  = link_to 'お気に入りしたイベント', my_favorite_events_path, class: 'nav-link'
+  = link_to '参加予定のイベント', my_participating_events_path, class: 'nav-link'
+  = link_to '参加済みのイベント', my_participated_events_path, class: 'nav-link'

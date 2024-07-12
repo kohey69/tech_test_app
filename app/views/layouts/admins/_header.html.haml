@@ -1,0 +1,16 @@
+%nav.navbar.navbar-expand-lg.bg-dark{data: {bs_theme: :dark}}
+  .container-fluid
+    = link_to 'EventManager管理者', admins_root_path, class: 'navbar-brand'
+    %button.navbar-toggler{data: {bs_target: "#navbarNavDropdown", bs_toggle: "collapse", type: "button"}}
+      %span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      %ul.navbar-nav
+        %li.nav-item
+          = link_to 'ユーザー一覧', admins_users_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'イベント一覧', admins_events_path, class: 'nav-link'
+        %li.nav-item
+          - if administrator_signed_in?
+            = link_to 'ログアウト', destroy_administrator_session_path, class: 'nav-link', data: { turbo_method: :delete }
+          - else
+            = link_to 'ログイン', new_administrator_session_path, class: 'nav-link'

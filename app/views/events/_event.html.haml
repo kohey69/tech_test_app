@@ -1,0 +1,8 @@
+.card.px-4.mb-3
+  .card-body
+    %h5.card-title= event.title
+    %h6.card-subtitle.mb-2.text-body-secondary= event.category.text
+    .text-muted= "開始日： #{l event.start_at}"
+    .text-muted= "終了日： #{l event.end_at}"
+    %p.card-text= "会場： #{event.place}"
+    %p.card-text= simple_format event.description

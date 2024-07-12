@@ -1,0 +1,6 @@
+%h1 ユーザー編集
+= simple_form_for [:admins, @user] do |f|
+  .form-inputs
+    = f.input :name
+    = f.input :email
+    = f.button :submit

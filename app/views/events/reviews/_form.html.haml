@@ -1,0 +1,4 @@
+= simple_form_for [event, review], url: event_review_path(event) do |f|
+  = f.input :score, as: :select, collection: 1..5, include_blank: false, hint: 'イベントを5段階で評価してください'
+  = f.input :content
+  = f.button :submit

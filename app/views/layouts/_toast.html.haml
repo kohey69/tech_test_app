@@ -1,0 +1,13 @@
+- if notice.present? || alert.present?
+  .position-fixed.top-0.end-0.m-2.z-1
+    .toast.show
+      .toast-header
+        %strong.me-auto 通知
+        %button.btn-close{ 'data-bs-dismiss': 'toast', type: 'button' }
+      .toast-body
+        - if notice
+          .text-success
+            = notice
+        - else
+          .text-danger
+            = alert

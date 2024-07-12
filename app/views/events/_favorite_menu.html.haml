@@ -1,0 +1,9 @@
+.d-flex.justify-content-center.mb-3
+  - if current_user&.favorite?(event)
+    = link_to event_favorite_path(event), class: 'btn btn-sm btn-danger', data: { turbo_method: :delete } do
+      %i.bi.bi-heart-fill
+      お気に入りを解除する
+  - else
+    = link_to event_favorite_path(event), class: 'btn btn-sm btn-danger', data: { turbo_method: :post } do
+      %i.bi.bi-heart
+      イベントをお気に入り
